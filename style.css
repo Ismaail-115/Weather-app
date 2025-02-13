@@ -39,3 +39,20 @@ button {
 .weather-info {
     margin-top: 20px;
 }
+
+
+#hourlyForecast {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+#hourlyForecast p {
+    background: rgba(0, 0, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}

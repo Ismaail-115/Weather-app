@@ -6,6 +6,7 @@ const searchButton = document.getElementById('searchButton');
 const locationElement = document.getElementById('location');
 const temperatureElement = document.getElementById('temperature');
 const descriptionElement = document.getElementById('description');
+const forecastContainer = document.getElementById ("hourlyForecast");
 
 searchButton.addEventListener('click', () => {
     const location = locationInput.value;
@@ -22,12 +23,15 @@ function fetchWeather(location) {
     .then(data => {
         const hourlyData = data.list.slice(0, 8);
         console.log(hourlyData);
-    });
-    
+        forecastContainer.innerHTML = "";
+
+        hourlyData.forEach(entry => {
+            const forecastElement = document.createElement("p");
+            forecastElement.textContent = `${entry.dt_txt}: ${entry.main.temp}°C - ${entry.weather[0].description}`;
+            forecastContainer.appendChild(forecastElement);
+        })
+    })
     .catch(error => {
         console.error('Error fetching weather data:', error);
     });
-}
-
-
-
+};
