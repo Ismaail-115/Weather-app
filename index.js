@@ -1,7 +1,7 @@
 const apiKey = 'adf5d06946f258229651003d5d3c72df';
 const apiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 
-const locationInput = document.getElementById('locationInput');
+const cityDropdown = document.getElementById('cityDropdown');
 const searchButton = document.getElementById('searchButton');
 const locationElement = document.getElementById('location');
 const temperatureElement = document.getElementById('temperature');
@@ -9,11 +9,29 @@ const descriptionElement = document.getElementById('description');
 const forecastContainer = document.getElementById ("hourlyForecast");
 
 searchButton.addEventListener('click', () => {
-    const location = locationInput.value;
+    const location = cityDropdown.value;
     if (location) {
         fetchWeather(location);
     }
 });
+
+fetch("major_cities.json")
+    .then(response => response.json())
+    .then(cities => {
+        console.log("Cities loaded:", cities);
+        if (!cityDropdown) {
+            console.error("Dropdown element not found");
+        }
+
+        cities.forEach(city => {
+            let option = document.createElement("option");
+            option.value = city.name;
+            option.textContent = `${city.name}, ${city.country}`;
+            cityDropdown.appendChild(option);
+        });
+    })
+    .catch(error => console.error("Error loading city list:", error));
+
 
 function fetchWeather(location) {
     const url = `${apiUrl}?q=${location}&appid=${apiKey}&units=metric`;
