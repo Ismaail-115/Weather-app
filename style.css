@@ -42,11 +42,31 @@ button {
 
 
 #hourlyForecast {
-    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     justify-content: center;
+    margin-top: 20px;
+}
+
+.forecast-item {
+    background: rgba(0, 0, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100px;
+}
+
+.forecast-item img {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+.forecast-item p {
+    margin: 5px 0;
+    font-weight: bold;
 }
 
 #hourlyForecast p {

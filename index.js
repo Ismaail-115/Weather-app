@@ -32,6 +32,13 @@ fetch("major_cities.json")
     })
     .catch(error => console.error("Error loading city list:", error));
 
+function formatTime(dateTimeString) {
+    const date = new Date(dateTimeString);
+    let hours = date.getHours();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${hours} ${ampm}`;
+}
 
 function fetchWeather(location) {
     const url = `${apiUrl}?q=${location}&appid=${apiKey}&units=metric`;
@@ -44,9 +51,24 @@ function fetchWeather(location) {
         forecastContainer.innerHTML = "";
 
         hourlyData.forEach(entry => {
-            const forecastElement = document.createElement("p");
-            forecastElement.textContent = `${entry.dt_txt}: ${entry.main.temp}°C - ${entry.weather[0].description}`;
-            forecastContainer.appendChild(forecastElement);
+            const forecastDiv = document.createElement("div");
+            forecastDiv.classList.add("forecast-item");
+            
+            const time = document.createElement("p");
+            time.textContent = formatTime(entry.dt_txt);
+
+            const icon = document.createElement("img");
+            icon.src = `https://openweathermap.org/img/wn/${entry.weather[0].icon}@2x.png`;
+            icon.alt = entry.weather[0].description;
+
+            const temp = document.createElement("p");
+            temp.textContent = `${entry.main.temp}°C`;
+
+            forecastDiv.appendChild(time);
+            forecastDiv.appendChild(icon);
+            forecastDiv.appendChild(temp);
+
+            forecastContainer.appendChild(forecastDiv);
         })
     })
     .catch(error => {
