@@ -42,5 +42,8 @@
     {"name": "Ankara", "country": "TR"},
     {"name": "Kyiv", "country": "UA"},
     {"name": "London", "country": "GB"},
+    {"name": "Nottingham", "country": "GB"},
+    {"name": "Manchester", "country": "GB"},
+    {"name": "Birmingham", "country": "GB"},
     {"name": "Washington, D.C.", "country": "US"}
 ]
